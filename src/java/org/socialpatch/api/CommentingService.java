@@ -13,6 +13,7 @@ import javax.jws.WebParam;
 import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
 import org.socialpatch.controller.CommentingController;
+import org.socialpatch.controller.PostingController;
 import org.socialpatch.entities.Comment;
 import org.socialpatch.entities.Resource;
 import org.socialpatch.facade.ResourceFacade;
@@ -28,6 +29,11 @@ public class CommentingService {
     private CommentingController commentingController;
     
     
+    public void addPostComment(Long postId, String uri, Comment comment){
+        
+        commentingController.addPostComment(postId,uri, comment);
+        
+    }
     
     public void addComment(String uri, Comment comment){
         
@@ -36,20 +42,19 @@ public class CommentingService {
     }
     
     public void updateComment(Comment comment){
-        
+        commentingController.updateComment(comment);
     }
     
-    public void removeComment(Long id){
-        
+    public void removeCommentById(Long id){
+        commentingController.removeCommentById(id);
     }
     
-    public List<Comment> getComments(String uri){
+    public List<Comment> getCommentsByUri(String uri){
         
         return commentingController.getAllCommentsByResourceUri(uri);
     }
     
-    
-    
+   
     
     public void commentTest(){
         

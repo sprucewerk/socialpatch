@@ -6,41 +6,37 @@ package org.socialpatch.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author sprucewerk
  */
 @Entity
-@Table(name = "resource")
+@Table(name = "post_access")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Resource.findAll", query = "SELECT r FROM Resource r"),
-    @NamedQuery(name = "Resource.findById", query = "SELECT r FROM Resource r WHERE r.id = :id"),
-    @NamedQuery(name = "Resource.findByUri", query = "SELECT r FROM Resource r WHERE r.uri = :uri"),
-    @NamedQuery(name = "Resource.findByCreatedAt", query = "SELECT r FROM Resource r WHERE r.createdAt = :createdAt")})
-public class Resource implements Serializable {
-    @OneToMany(mappedBy = "resource")
-    private List<Post> postList;
+    @NamedQuery(name = "PostAccess.findAll", query = "SELECT p FROM PostAccess p"),
+    @NamedQuery(name = "PostAccess.findById", query = "SELECT p FROM PostAccess p WHERE p.id = :id"),
+    @NamedQuery(name = "PostAccess.findByCreatedAt", query = "SELECT p FROM PostAccess p WHERE p.createdAt = :createdAt"),
+    @NamedQuery(name = "PostAccess.findByPersonId", query = "SELECT p FROM PostAccess p WHERE p.personId = :personId"),
+    @NamedQuery(name = "PostAccess.findByGroupId", query = "SELECT p FROM PostAccess p WHERE p.groupId = :groupId")})
+public class PostAccess implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,23 +48,32 @@ public class Resource implements Serializable {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "uri")
-    private String uri;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resource")
-    private List<Comment> commentList;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "person_id")
+    private String personId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "group_id")
+    private String groupId;
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Post post;
 
-    public Resource() {
+    public PostAccess() {
     }
 
-    public Resource(Long id) {
+    public PostAccess(Long id) {
         this.id = id;
     }
 
-    public Resource(Long id, Date createdAt) {
+    public PostAccess(Long id, Date createdAt, String personId, String groupId) {
         this.id = id;
         this.createdAt = createdAt;
+        this.personId = personId;
+        this.groupId = groupId;
     }
 
     public Long getId() {
@@ -87,21 +92,28 @@ public class Resource implements Serializable {
         this.createdAt = createdAt;
     }
 
-    public String getUri() {
-        return uri;
+    public String getPersonId() {
+        return personId;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 
-    //@XmlTransient
-    public List<Comment> getCommentList() {
-        return commentList;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 
     @Override
@@ -114,10 +126,10 @@ public class Resource implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Resource)) {
+        if (!(object instanceof PostAccess)) {
             return false;
         }
-        Resource other = (Resource) object;
+        PostAccess other = (PostAccess) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -126,16 +138,7 @@ public class Resource implements Serializable {
 
     @Override
     public String toString() {
-        return "org.socialpatch.entities.Resource[ id=" + id + " ]";
-    }
-
-    @XmlTransient
-    public List<Post> getPostList() {
-        return postList;
-    }
-
-    public void setPostList(List<Post> postList) {
-        this.postList = postList;
+        return "org.socialpatch.entities.PostAccess[ id=" + id + " ]";
     }
     
 }

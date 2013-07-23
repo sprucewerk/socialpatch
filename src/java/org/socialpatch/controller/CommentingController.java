@@ -4,12 +4,15 @@
  */
 package org.socialpatch.controller;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import org.socialpatch.entities.Comment;
+import org.socialpatch.entities.Post;
 import org.socialpatch.entities.Resource;
 import org.socialpatch.facade.CommentFacade;
+import org.socialpatch.facade.PostFacade;
 import org.socialpatch.facade.ResourceFacade;
 
 /**
@@ -23,7 +26,8 @@ public class CommentingController {
     private CommentFacade commentFacade;
     @EJB
     private ResourceFacade resourceFacade;
-    
+    @EJB
+    private PostFacade postFacade;
     
     /**
      * Adds comment for a resource.
@@ -33,7 +37,7 @@ public class CommentingController {
      * @param comment - comment 
      */
     public void addComment(String uri, Comment comment){
-        
+        System.out.println("addComment -uri"+uri);
         Resource resource = resourceFacade.findByUri(uri);
         
         if(resource==null){
@@ -45,12 +49,44 @@ public class CommentingController {
         
     }
     
+    
+    
+    
+    public void addPostComment(Long postId, String uri, Comment comment) {
+        System.out.println("addPostComment - postId="+postId);
+        Post post = postFacade.find(postId);
+        
+        Resource resource = resourceFacade.findByUri(uri);
+        
+        if(resource==null){
+            resource = resourceFacade.createByUri(uri);
+            post.setResource(resource);
+        }
+
+        post.setUpdatedAt(new Date());//refresh post
+        comment.setResource(resource);
+        resource.getCommentList().add(comment);
+        
+    }
+
+    
+    
+    
+    
     public List<Comment> getAllCommentsByResourceUri(String uri){
         Resource resource = resourceFacade.findByUri(uri);
         
         if(resource == null) return null;
         
         return resource.getCommentList();
+    }
+
+    public void updateComment(Comment comment) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void removeCommentById(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
