@@ -15,7 +15,7 @@ import org.socialpatch.entities.Resource;
 
 /**
  *
- * @author vitalifichtner
+ * @author sprucewerk
  */
 @Stateless
 public class ResourceFacade extends AbstractFacade<Resource> {

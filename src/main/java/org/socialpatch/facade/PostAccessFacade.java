@@ -7,14 +7,14 @@ package org.socialpatch.facade;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.socialpatch.entities.Comment;
+import org.socialpatch.entities.PostAccess;
 
 /**
  *
  * @author sprucewerk
  */
 @Stateless
-public class CommentFacade extends AbstractFacade<Comment> {
+public class PostAccessFacade extends AbstractFacade<PostAccess> {
     @PersistenceContext(unitName = "socialpatchPU")
     private EntityManager em;
 
@@ -23,8 +23,8 @@ public class CommentFacade extends AbstractFacade<Comment> {
         return em;
     }
 
-    public CommentFacade() {
-        super(Comment.class);
+    public PostAccessFacade() {
+        super(PostAccess.class);
     }
     
 }

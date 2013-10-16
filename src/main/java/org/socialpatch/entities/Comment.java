@@ -22,11 +22,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author vitalifichtner
+ * @author sprucewerk
  */
 @Entity
 @Table(name = "comment")
@@ -130,6 +132,7 @@ public class Comment implements Serializable {
         this.createdAt = createdAt;
     }
 
+    @XmlTransient
     public Resource getResource() {
         return resource;
     }
