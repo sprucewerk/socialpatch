@@ -74,10 +74,13 @@ public class CommentingController {
     
     
     public List<Comment> getAllCommentsByResourceUri(String uri){
+        System.out.println("getAllCommentsByResourceUri - "+uri);
+        
         Resource resource = resourceFacade.findByUri(uri);
         
         if(resource == null) return null;
         
+        System.out.println("resource.getCommentList() - "+resource.getCommentList());
         return resource.getCommentList();
     }
 
