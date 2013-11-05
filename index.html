@@ -1,35 +1,36 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>Socialpatch by sprucewerk</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Socialpatch : Patch your Java EE app with social features like comments, shares, likes and hashtags." />
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
-    <script src="javascripts/scale.fix.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Socialpatch</title>
   </head>
+
   <body>
-    <div class="wrapper">
-      <header>
-        <h1 class="header">Socialpatch</h1>
-        <p class="header">Patch your Java EE app with social features like comments, shares, likes and hashtags.</p>
 
-        <ul>
-          <li class="download"><a class="buttons" href="https://github.com/sprucewerk/socialpatch/zipball/master">Download ZIP</a></li>
-          <li class="download"><a class="buttons" href="https://github.com/sprucewerk/socialpatch/tarball/master">Download TAR</a></li>
-          <li><a class="buttons github" href="https://github.com/sprucewerk/socialpatch">View On GitHub</a></li>
-        </ul>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/sprucewerk/socialpatch">View on GitHub</a>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/sprucewerk">sprucewerk</a></p>
+          <h1 id="project_title">Socialpatch</h1>
+          <h2 id="project_tagline">Patch your Java EE app with social features like comments, shares, likes and hashtags.</h2>
 
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/sprucewerk/socialpatch/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/sprucewerk/socialpatch/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
 
-      </header>
-      <section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
         <h3>
 <a name="welcome-to-socialpatch" class="anchor" href="#welcome-to-socialpatch"><span class="octicon octicon-link"></span></a>Welcome to Socialpatch.</h3>
 
@@ -50,7 +51,20 @@ $ git checkout gh-pages
 <p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
 
 <h3>
-<a name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap</h3>
+<a name="setup" class="anchor" href="#setup"><span class="octicon octicon-link"></span></a>Setup</h3>
+
+<ol>
+<li>Deploy <strong>socialpatch-server.war</strong>
+</li>
+<li>Place <strong>socialpatch-client.jar</strong> in the classpath of your application</li>
+<li>Tell the client where he can found the social-server. </li>
+</ol><p>Modify web.xml</p>
+
+<pre><code> &lt;context-param&gt;
+        &lt;param-name&gt;socialpatch-server-url&lt;/param-name&gt;
+        &lt;param-value&gt;http://localhost:8080/socialpatch-server/&lt;/param-value&gt;
+ &lt;/context-param&gt;
+</code></pre>
 
 <p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
@@ -64,11 +78,17 @@ $ git checkout gh-pages
 
 <p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
       </section>
-      <footer>
-        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Socialpatch maintained by <a href="https://github.com/sprucewerk">sprucewerk</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
       </footer>
     </div>
-    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-		
+
+    
+
   </body>
 </html>
